@@ -1,0 +1,44 @@
+<%= form_with model: @task, local: true, class: "form" do |f| %>
+  <div class="row">
+    <%= f.label :summary, class: "col-sm-2 col-form-label col-form-label-lg" %>
+    <div class="col-sm-10">
+      <%= f.text_field :summary, class: "form-control", placeholder: "Enter summary", required: true, minlength: 8, disabled: view_only %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <%= f.label :description, class: "col-sm-2 col-form-label col-form-label-lg" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, class: "form-control", placeholder: "Enter description", required: true, minlength: 15, disabled: view_only %>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <%= f.label :project, class: "col-sm-2 col-form-label col-form-label-lg" %>
+    <div class="col-sm-4">
+      <%= f.collection_select :project_id, Project.order(:title), :id, :title, { prompt: 'Select Project' }, { required: true, class: "form-select", disabled: view_only } %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <%= f.label :assignee, class: "col-sm-2 col-form-label col-form-label-lg" %>
+    <div class="col-sm-4">
+      <%= f.collection_select :assignee_id, User.order(:first_name, :last_name), :id, :full_name, { selected: current_user.id }, { class: "form-select", disabled: view_only } %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <%= f.label :status, class: "col-sm-2 col-form-label col-form-label-lg" %>
+    <div class="col-sm-4">
+      <%= f.select :status, options_for_select(Task.statuses.keys.map { |status| [status.humanize, status] }, @task.status), {}, { class: "form-select", disabled: view_only } %>
+    </div>
+  </div>
+
+  <% if view_only %>
+    <%= render 'task_view_only_fields' %>
+  <% else %>
+    <div class="form-group">
+      <%= f.submit "Submit", class: "offset-sm-4 col-sm-4 btn btn-primary btn-lg mt-4" %>
+    </div>
+  <% end %>
+<% end %>

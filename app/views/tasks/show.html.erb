@@ -1,0 +1,8 @@
+<div class="fs-3">Task Details</div>
+<div class="container">
+  <%= render partial: 'task_form', locals: { view_only: true } %>
+  <div class="mt-4 text-center">
+    <%= link_to "Edit", edit_task_path(@task), class: "btn btn-primary col-1 me-2" %>
+    <%= link_to "Delete", @task, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete the task - #{@task.summary}?" }, class: "btn btn-danger col-1"  %>
+  </div>
+</div>
