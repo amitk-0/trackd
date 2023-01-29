@@ -2,7 +2,9 @@ class Project < ApplicationRecord
   acts_as_paranoid
   has_paper_trail
 
-  validates_presence_of :title, :code
+  validates :title, presence: true, length: { minimum: 4 }
+  validates :code, presence: true, length: { maximum: 6 }
+
   belongs_to :project_lead, class_name: 'User', optional: true
   has_many :tasks
 end

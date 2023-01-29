@@ -39,6 +39,7 @@ end
 #  deleted_at      :datetime
 #  email           :string
 #  first_name      :string
+#  is_admin        :boolean          default(FALSE)
 #  last_name       :string
 #  password_digest :string
 #  created_at      :datetime         not null

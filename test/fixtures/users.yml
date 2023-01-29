@@ -6,6 +6,7 @@
 #  deleted_at      :datetime
 #  email           :string
 #  first_name      :string
+#  is_admin        :boolean          default(FALSE)
 #  last_name       :string
 #  password_digest :string
 #  created_at      :datetime         not null
@@ -22,3 +23,9 @@ user_two:
   last_name: Doe
   email: jane.doe@example.com
   password_digest: pqrs
+
+user_admin:
+  first_name: Admin
+  last_name: A
+  email: admin.a@example.com
+  password_digest: AdminPwd123

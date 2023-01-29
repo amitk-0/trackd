@@ -9,12 +9,27 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal project.errors.full_messages.first, "Title can't be blank"
   end
 
+  test 'invalid with short title' do
+    project = projects(:project_one)
+    project.title = 'ab'
+    assert_not project.valid?
+    assert_equal project.errors.full_messages.first, 'Title is too short (minimum is 4 characters)'
+  end
+
   test 'invalid without code' do
     project = projects(:project_two)
     project.code = nil
     assert_not project.valid?
     assert_equal project.errors.full_messages.first, "Code can't be blank"
   end
+
+  test 'invalid with large title' do
+    project = projects(:project_two)
+    project.title = 'ab'
+    assert_not project.valid?
+    assert_equal project.errors.full_messages.first, 'Title is too short (minimum is 4 characters)'
+  end
+
 end
 
 # == Schema Information

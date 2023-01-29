@@ -62,10 +62,6 @@ class TasksController < ApplicationController
     Task.column_names.include?(params[:sort]) ? params[:sort] : 'id'
   end
 
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-  end
-
   def status_filter
     Task.statuses.keys.include?(params[:status]) ? params[:status] : nil
   end

@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   helper_method :current_user
   helper_method :logged_in?
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def current_user
     User.find_by(id: session[:user_id])
@@ -16,9 +19,15 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    unless current_user
-      redirect_to login_path, alert: 'Please log in to continue'
-    end
+    redirect_to login_path, alert: 'Please log in to continue' unless current_user
+  end
+
+  def authenticate_admin!
+    redirect_to root_path, alert: 'Please log in as admin to continue' unless current_user.is_admin
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
 end

@@ -20,13 +20,13 @@
 #  project_lead_id  (project_lead_id => users.id)
 #
 project_one:
-  title: Sample1
+  title: Sample title1
   code: smpl1
   description: New projet to track HR activities
   project_lead: user_one
 
 project_two:
-  title: Sample2
+  title: Sample title2
   code: smpl2
   description: New projet to track Admin activities
   project_lead: user_two

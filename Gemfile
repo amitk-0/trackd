@@ -22,6 +22,7 @@ gem "jquery-rails"
 gem "paper_trail"
 gem "acts_as_paranoid"
 gem "rails-controller-testing"
+gem "pundit"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

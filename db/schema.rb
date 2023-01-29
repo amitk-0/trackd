@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_28_044118) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_29_095650) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.string "code"
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_044118) do
     t.datetime "deleted_at"
     t.integer "assignee_id"
     t.integer "created_by_id", null: false
+    t.string "task_identifier"
     t.index ["assignee_id"], name: "index_tasks_on_assignee_id"
     t.index ["created_by_id"], name: "index_tasks_on_created_by_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -45,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_044118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.boolean "is_admin", default: false
   end
 
   create_table "versions", force: :cascade do |t|
