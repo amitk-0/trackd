@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
   def project_tasks
     authorize @project
-    @tasks = @project.tasks
+    @tasks = @project.tasks.order(task_sort_column + " " + sort_direction)
   end
 
   private
@@ -50,8 +50,8 @@ class ProjectsController < ApplicationController
     user_not_authorized
   end
 
-  def sort_column
-    Project.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+  def task_sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'id'
   end
 
 end

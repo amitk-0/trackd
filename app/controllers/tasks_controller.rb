@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:all_tasks]
+  before_action :authenticate_admin!, only: [:all_tasks]
   before_action :set_task, only: [:edit, :update, :show, :destroy]
 
   def index
@@ -29,13 +30,16 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-
+  def all_tasks
+    @tasks = Task.all.order(sort_column + " " + sort_direction)
   end
 
   def update
     flash[:notice] = @task.update(task_params) ? 'The task was updated successfully' : 'Error while updating task'
     redirect_to edit_task_path(@task)
+  end
+
+  def edit
   end
 
   def show

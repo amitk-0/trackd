@@ -88,4 +88,21 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task1.reload
     assert_equal @task1.summary, 'changed summary'
   end
+
+  test 'should get all tasks when admin' do
+    @user.update(is_admin: true)
+    get '/all_tasks'
+    assert_response :success
+    assert_equal assigns(:tasks).count, 4
+  end
+
+  test 'should not get all tasks when non-admin' do
+    @user.update(is_admin: false)
+    get '/all_tasks'
+    assert_redirected_to root_path do |redirect|
+      assert_equal 'Information you requested, either does not exist or is not authorized for access.', flash[:error]
+    end
+    assert_nil assigns(:tasks)
+  end
+
 end

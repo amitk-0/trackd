@@ -25,6 +25,9 @@
               </li>
               <% if current_user.is_admin %>
                 <li class="nav-item">
+                  <%= link_to "All Tasks", 'all_tasks', class: "nav-link fs-4", 'aria-current': "page" %>
+                </li>
+                <li class="nav-item">
                   <%= link_to "Projects", projects_path, class: "nav-link fs-4", 'aria-current': "page" %>
                 </li>
               <% end %>
