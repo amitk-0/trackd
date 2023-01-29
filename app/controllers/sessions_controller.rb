@@ -1,9 +1,6 @@
 class SessionsController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
 
-  def new
-  end
-
   def create
     user = User.find_by(email: session_params[:email].downcase)
     if user && user.authenticate(session_params[:password])
@@ -19,6 +16,9 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = 'Logged Out!'
     redirect_to root_path
+  end
+
+  def new
   end
 
   private

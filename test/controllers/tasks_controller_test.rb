@@ -85,7 +85,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_task_path(@task1) do |redirect|
       assert_equal 'The task was updated successfully', flash[:notice]
     end
-    @task1.reload!
-    assert_equal @task1.
+    @task1.reload
+    assert_equal @task1.summary, 'changed summary'
   end
 end
